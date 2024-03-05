@@ -14,8 +14,10 @@ import org.springframework.context.annotation.FilterType;
         // excludeFilters 는 기존코드에 영향을 안받기위해 사용, @Configuration 되 있는것들이 많음
 )
 public class AutoAppConfig {
+/*
     @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
+*/
 }
