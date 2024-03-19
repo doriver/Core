@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
+    private final MyLogger myLogger; // 프록시로 일단 가짜를 넣어둠
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString();
-        MyLogger myLogger = myLoggerProvider.getObject(); // HTTP 요청이 진행중이므로 request scope빈 이 생성된다
-        myLogger.setRequestURL(requestURL);
+//        MyLogger myLogger = myLoggerProvider.getObject(); // HTTP 요청이 진행중이므로 request scope빈 이 생성된다
+
+        System.out.println("myLogger = " + myLogger.getClass());
+        myLogger.setRequestURL(requestURL); // 기능을 실제 호출하는 시점에, 진짜를 찾아서 동작
 
         myLogger.log("controller test");
         logDemoService.logic("testId");
